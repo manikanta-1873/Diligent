@@ -5,7 +5,7 @@ This project implements a self-hosted AI assistant (Jarvis) using Ollama and Pin
 It supports contextual question answering using vector-based retrieval and a chatbot UI.
 
 ## Tech Stack
-- LLM: Ollama (LLaMA 3)
+- LLM: Ollama (tinyllama)
 - Vector Database: Pinecone
 - Framework: LangChain
 - UI: Streamlit
