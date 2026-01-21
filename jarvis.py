@@ -43,30 +43,34 @@ def add_knowledge(text):
     vectorstore.add_documents(docs)
 
 def ask_jarvis(query):
-    docs = vectorstore.similarity_search(query, k=2)
+    docs = vectorstore.similarity_search(query, k=3)
     context = "\n".join([d.page_content for d in docs])
 
     prompt = f"""
-You are Jarvis, an AI assistant.
+You are Jarvis, a knowledgeable AI assistant similar to ChatGPT.
 
-Answer the user's message naturally and concisely.
-Do not repeat the question.
-Do not explain anything.
-Do not include labels or headings.
+Answer the user's question clearly, directly, and informatively.
+Do NOT introduce yourself.
+Do NOT talk about being an AI.
+Do NOT add filler or meta commentary.
 
-Context (use only if helpful):
+If relevant context is provided, use it.
+Otherwise, answer from general knowledge.
+
+Context:
 {context}
 
-User:
+User question:
 {query}
 
-Assistant:
+Final answer:
 """
 
     response = llm.invoke(prompt)
 
-    # Safety cleanup: return only the first meaningful line
-    return response.strip().split("\n")[0]
+    # Return clean response
+    return response.strip()
+
 
 
 
